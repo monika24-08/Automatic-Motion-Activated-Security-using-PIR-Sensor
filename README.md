@@ -17,21 +17,20 @@
      Passive Infrared (PIR) sensors are electronic devices that detect motion by sensing infrared radiation emitted by objects. Every object with a temperature above absolute zero emits infrared radiation. The PIR sensor detects this radiation and can sense motion when a warm object, such as a human body, passes within its detection range. The sensor contains a pair of pyroelectric sensors housed under a Fresnel lens, which focuses the infrared signals onto the sensor surface. When the infrared levels change rapidly between the two pyroelectric sensors—such as when a person walks by—the sensor outputs a HIGH signal indicating motion detection.
 PIR sensors are widely used in motion detection systems, security alarms, automatic lighting systems, and smart surveillance. They are popular due to their low power consumption, affordability, and ease of integration with microcontrollers such as the Arduino Uno. The sensor typically has three pins: VCC (power), GND (ground), and OUT (signal). When idle, the output pin remains LOW. Once motion is detected, the sensor sends a HIGH signal to the microcontroller, which can be used to trigger a response such as turning on an LED or activating an alarm.
 In this experiment, the PIR sensor is connected to an Arduino Uno board. The VCC pin of the sensor is connected to the 5V supply of the Arduino to power the sensor. The GND pin is connected to the Arduino’s ground. The OUT pin is connected to a digital input pin (pin 2 in this case) of the Arduino. The Arduino continuously monitors the state of the signal pin. If the signal pin goes HIGH, it means the sensor has detected motion, and the Arduino is programmed to turn ON the built-in LED on pin 13. If no motion is detected, the signal remains LOW, and the LED is turned OFF.
-Circuit Diagram:
- 
-## Procedure: //Modify based on your circuit
+## Circuit Diagram:
+<img width="1388" height="772" alt="image" src="https://github.com/user-attachments/assets/f5f82819-93e4-402f-ac62-0d9cba42bb7e" />
+
+## Procedure: 
 
 Step 1: Set Up the Tinkercad Environment
 1.	Log in to Tinkercad: Open https://www.tinkercad.com in your browser and log in to your account.
-2.	Create a New Circuit: In the Tinkercad dashboard, click on “Circuits” and then select “Create New Circuit” to open a new simulation workspace.
-3.	
+2.	Create a New Circuit: In the Tinkercad dashboard, click on “Circuits” and then select “Create New Circuit” to open a new simulation workspace.	
 Step 2: Add Components to the Circuit
 1.	Arduino Uno: Drag and drop the Arduino Uno R3 board from the components panel into your workspace.
 2.	PIR Sensor: Search for the PIR sensor in the components panel and drag it into the workspace.
 3.	LED (optional): The project uses the built-in LED on pin 13, but if preferred, you can add an external LED to visualize the output.
 4.	Resistor (for external LED): Use a 220-ohm resistor in series with the external LED (if added) to limit current.
 5.	Jumper Wires: Use jumper wires to make all necessary connections between the Arduino, sensor, and other components.
-
 Step 3: Connect the PIR Sensor to the Arduino
 1.	PIR Sensor Pin Connections:
 o	VCC (Power Pin): Connect to the 5V pin on the Arduino.
@@ -60,13 +59,34 @@ Step 7: Save Your Work
 
 
 # Code:
+```
+// C++ code
+//
+/*
+  Code for Security System
+*/
 
+void setup()
+{
+  pinMode(7, INPUT);
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+}
 
-
+void loop()
+{
+  if (digitalRead(7) == HIGH) {
+    digitalWrite(8, HIGH);
+    tone(9, 523, 1000); // play tone 60 (C5 = 523 Hz)
+  } else {
+    digitalWrite(8, LOW);
+    noTone(9);
+  }
+  delay(1000); // Wait for 1000 millisecond(s)
+}
+```
 # Output:
-
-
-
+https://github.com/user-attachments/assets/c81c3ef2-f508-49e3-9119-0d30aad77473
 
 # Result:
 The PIR sensor successfully detected motion and triggered the Arduino to turn ON the built-in LED. The LED remained OFF when no motion was present, confirming correct circuit and code functionality.
